@@ -4,7 +4,7 @@ Modul ini adalah simulasi shared dataset tanaman dengan REST-API. Dikembangkan d
 
 ## Penggunaan:
 
-Untuk mendapatkan keseluruhan dataset:
+Untuk mendapatkan keseluruhan dataset tanaman:
 ```
 http://domainname/index.php/tanaman
 ```
@@ -29,4 +29,9 @@ http://domainname/index.php/tanaman?s=padi
 - Untuk mendapatkan dataset tanaman jagung dengan ph 6.0 (toleransi +/- 1.0)
 ```
 http://domainname/index.php/tanaman?s=jagung&ph=6
+```
+
+Untuk dataset Skema Tanam dapat menggunakan format url:
+```
+http://domainname/index.php/skema_tanam?id=idtanaman
 ```
