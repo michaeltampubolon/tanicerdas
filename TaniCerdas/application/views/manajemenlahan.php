@@ -1,122 +1,180 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
-<?php $this->load->view('layout/header');?>
+
+<?php $this->load->view('layout/header2');?>
+
 <!--sidebar-menu-->
+
 <div id="sidebar"> <a href="#" class="visible-phone"><i class="icon icon-list"></i>Forms</a>
-  <ul>
+    <ul>
     <li><a href="<?php echo base_url();?>index.php/Beranda"><i class="icon icon-home"></i> <span>Timeline</span></a> </li>
     
-    <li class="submenu active"> <a href="<?php echo base_url();?>index.php/Beranda/lahan"><i class="icon icon-inbox"></i> <span>Manajemen Lahan</span></a> </li>
+    <li><a href="<?php echo base_url();?>index.php/Beranda/detail/<?php echo $this->session->userdata('id_user')?>">
+    <i class="icon icon-user"></i> <span>Profil</span></a> </li>
 
-    <li><a href="charts.html"><i class="icon icon-signal"></i> <span>Charts &amp; graphs</span></a> </li>
-    <li><a href="widgets.html"><i class="icon icon-inbox"></i> <span>Widgets</span></a> </li>
-    <li><a href="tables.html"><i class="icon icon-th"></i> <span>Tables</span></a></li>
-    <li><a href="grid.html"><i class="icon icon-fullscreen"></i> <span>Full width</span></a></li>
-    
-    <li><a href="buttons.html"><i class="icon icon-tint"></i> <span>Buttons &amp; icons</span></a></li>
-    <li><a href="interface.html"><i class="icon icon-pencil"></i> <span>Eelements</span></a></li>
-    <li class="submenu"> <a href="#"><i class="icon icon-file"></i> <span>Addons</span> <span class="label label-important">5</span></a>
-      <ul>
-        <li><a href="index2.html">Dashboard2</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="calendar.html">Calendar</a></li>
-        <li><a href="invoice.html">Invoice</a></li>
-        <li><a href="chat.html">Chat option</a></li>
-      </ul>
-    </li>
-    <li class="submenu"> <a href="#"><i class="icon icon-info-sign"></i> <span>Error</span> <span class="label label-important">4</span></a>
-      <ul>
-        <li><a href="error403.html">Error 403</a></li>
-        <li><a href="error404.html">Error 404</a></li>
-        <li><a href="error405.html">Error 405</a></li>
-        <li><a href="error500.html">Error 500</a></li>
-      </ul>
-    </li>
-    <li class="content"> <span>Monthly Bandwidth Transfer</span>
-      <div class="progress progress-mini progress-danger active progress-striped">
-        <div style="width: 77%;" class="bar"></div>
-      </div>
-      <span class="percent">77%</span>
-      <div class="stat">21419.94 / 14000 MB</div>
-    </li>
-    <li class="content"> <span>Disk Space Usage</span>
-      <div class="progress progress-mini active progress-striped">
-        <div style="width: 87%;" class="bar"></div>
-      </div>
-      <span class="percent">87%</span>
-      <div class="stat">604.44 / 4000 MB</div>
-    </li>
+    <li  class="active"> <a href="<?php echo base_url();?>index.php/Beranda/manajemenlahan"><i class="icon icon-inbox"></i> <span>Manajemen Lahan</span></a> </li>
+
+    <li> <a href="<?php echo base_url();?>index.php/Beranda/komunitas/<?php echo $this->session->userdata('id_user')?>"><i class="icon icon-inbox"></i> <span>Komunitas</span></a> </li>
   </ul>
 </div>
 
-<!--close-left-menu-stats-sidebar-->
-
 <div id="content">
-<div id="content-header">
-  <div id="breadcrumb"> <a href="<?php echo base_url();?>index.php/Beranda" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Timeline</a> <a href="#" class="tip-bottom">Manajemen Lahan</a> <a href="#" class="current">Tambah Lahan</a> </div>
-  <h1>Tambahkan Informasi Lahan Anda.</h1>
-</div>
-<div class="container-fluid">
-  <hr>
-  <div class="row-fluid">
-    <div class="widget-box">
-      <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-        <h5>Informasi Lahan</h5>
-      </div>
-      <div class="widget-content">
-        <div class="control-group">
-          <form  method="post" action="<?php echo site_url('Lahan/tambah_lahan') ?>"  method="get" class="form-horizontal">
-            
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="<?php echo base_url();?>index.php/Beranda" title="Menuju Timeline" class="tip-bottom"><i class="icon-home"></i> Timeline</a> <a href="<?php echo base_url();?>index.php/Beranda/manajemenlahan" class="current">Manajemen Lahan</a> <a class="tip-bottom">Tambah Lahan</a> </div>
+    <h1>Manajemen Informasi Lahan Anda.</h1>
+  </div>
+   
+  <div class="container-fluid">
+      <a href="<?php echo base_url();?>index.php/Beranda/lahan"> <button class="btn btn-success">Buka Lahan Baru</button></a>
+  </div>
 
 
+  <div class="container-fluid">
+    <hr>
+    <div class="row-fluid">
+      <div class="span12">
+  
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+            <h5>Informasi Lahan</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <table class="table table-bordered data-table">
+              <thead>
+                <tr>
+                  <th>DAFTAR INFORMASI LAHAN</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="gradeX">
+                  <td> 
+                      <div class="widget-box collapsible">    
+                        <?php $no=0; foreach($lahan as $lahans ): $no++;?>
+                          <div class="widget-title"> <a href="#<?php echo $lahans->id_lahan;?>" data-toggle="collapse"> <span class="icon"><i class="icon-remove"></i></span>
+                            <h5>LAHAN <?php echo $no." - ID LAHAN : ".$lahans->id_lahan;?></h5>
+                          </a> </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-          </form>
+                          <div class="collapse" id="<?php echo $lahans->id_lahan;?>">
+                            <div class="widget-content">  
+                              <ul class="recent-posts">
+                              <li>
+                                <div class="user-thumb"> <img width="40" height="40" alt="User" src="<?php echo base_url();?>assets/img/demo/av1.jpg"> </div>
+                                <div class="article-post">
+                                  <div class="fr">
+                                     <?=  anchor('Lahan/ubah_lahan/'.$lahans->id_lahan,'Ubah',['class'=>'btn btn-primary']) ?> 
+                                     <?=  anchor('Lahan/hapus_lahan/'.$lahans->id_lahan,'Hapus',['class'=>'btn btn-danger','onclick'=>'return confirm(\'Anda yakin menghapus Informasi Lahan ? \')']) ?>
+                                  </div>
+                                
+                                  <div class="row-fluid">
+                                  <div class="span4">
+                                    <div class="widget-box">
+                                      <div class="widget-title"> <span class="icon"> <i class="icon-map-marker"></i> </span>
+                                        <h5>Lokasi</h5>
+                                      </div>
+                                      <div class="widget-content nopadding">
+                                        <table class="table table-bordered">
+                                          <tbody>
+                                            <tr>
+                                              <td>Provinsi</td>
+                                              <td><?php echo $lahans->provinsi;?></td>
+                                            </tr>
+                                            <tr>
+                                              <td>Kota</td>
+                                              <td><?php echo $lahans->kota;?></td>
+                                            </tr>
+                                            <tr>
+                                              <td>Kecamatan</td>
+                                              <td><?php echo $lahans->kecamatan;?></td>
+                                            </tr>
+                                            <tr>
+                                              <td>Longitude Latitude</td>
+                                              <td><?php echo $lahans->longlat;?></td>
+                                            </tr>
+                                            <tr>
+                                              <td>Luas</td>
+                                              <td><?php echo $lahans->luas;?> m<sup>2</sup></td> 
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="span4">
+                                    <div class="widget-box">
+                                      <div class="widget-title"> <span class="icon"> <i class="icon-reorder"></i> </span>
+                                        <h5>Karakteristik Lahan</h5>
+                                      </div>
+                                      <div class="widget-content nopadding">
+                                        <table class="table table-bordered">
+                                          <tbody>
+                                            <tr>
+                                              <td>Temperatur</td>
+                                              <td><?php echo $lahans->temperatur;?> &deg;C</td>
+                                            </tr>
+                                            <tr>
+                                              <td>Curah Hujan</td>
+                                              <td><?php echo $lahans->curah_hujan;?> mm</td>
+                                            </tr>
+                                            <tr>
+                                              <td>Tekstur Tanah</td>
+                                              <td><?php echo $lahans->tekstur;?></td>
+                                            </tr>
+                                            <tr>
+                                              <td>pH Tanah</td>
+                                              <td><?php echo $lahans->ph;?> pH</td>
+                                            </tr>
+                                            <tr>
+                                              <td>Kondisi Drainase</td>
+                                              <td><?php echo $lahans->drainase;?></td>
+                                            </tr>
+                                            <tr>
+                                              <td>Kedalaman Tanah</td>
+                                              <td><?php echo $lahans->kedalaman_tanah;?> Cm</td>
+                                            </tr>
+                                            <tr>
+                                              <td>Kemiringan Lereng</td>
+                                              <td><?php echo $lahans->lereng;?> &deg;</td>
+                                            </tr>
+                                            <tr>
+                                              <td>Ketebalan Gambut</td>
+                                              <td><?php echo $lahans->ketebalan_gambut;?> Cm</td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                </div>
+                                 <?=  anchor('Lahan/listjadwaltanam/'.$lahans->id_lahan,'Jadwal Tanam',['class'=>'btn btn-success']) ?> 
+                              </li>
+                            </ul>
+                            </div>
+                          </div>
+                        <?php endforeach; ?>
+                      </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div></div>
+</div>
 <!--Footer-part-->
 <div class="row-fluid">
-  <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
+  <div id="footer" class="span12"> 2013 &copy; Design by <a href="https://tanicerdas.com">Tani Cerdas</a> </div>
 </div>
-<!--end-Footer-part--> 
-<script src="js/jquery.min.js"></script> 
-<script src="js/jquery.ui.custom.js"></script> 
-<script src="js/bootstrap.min.js"></script> 
-<script src="js/bootstrap-colorpicker.js"></script> 
-<script src="js/bootstrap-datepicker.js"></script> 
-<script src="js/jquery.toggle.buttons.js"></script> 
-<script src="js/masked.js"></script> 
-<script src="js/jquery.uniform.js"></script> 
-<script src="js/select2.min.js"></script> 
-<script src="js/matrix.js"></script> 
-<script src="js/matrix.form_common.js"></script> 
-<script src="js/wysihtml5-0.3.0.js"></script> 
-<script src="js/jquery.peity.min.js"></script> 
-<script src="js/bootstrap-wysihtml5.js"></script> 
-<script>
-	$('.textarea_editor').wysihtml5();
-</script>
+<!--end-Footer-part-->
+<script src="<?php echo base_url();?>assets/js/jquery.min.js"></script> 
+<script src="<?php echo base_url();?>assets/js/jquery.ui.custom.js"></script> 
+<script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script> 
+<script src="<?php echo base_url();?>assets/js/jquery.uniform.js"></script> 
+<script src="<?php echo base_url();?>assets/js/select2.min.js"></script> 
+<script src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script> 
+<script src="<?php echo base_url();?>assets/js/matrix.js"></script> 
+<script src="<?php echo base_url();?>assets/js/matrix.tables.js"></script>
 </body>
 </html>

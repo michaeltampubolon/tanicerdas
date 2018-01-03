@@ -23,9 +23,7 @@ class Login extends CI_Controller {
     } else {
       $usr = $this->input->post('username');
       $psw = $this->input->post('password');
-      $u = $usr;
-      $p = ($psw);
-      $cek = $this->Mod_Login->cek($u, $p);
+      $cek = $this->Mod_Login->cek($usr, md5($psw));
       if ($cek->num_rows() > 0) {
         //login berhasil, buat session
         foreach ($cek->result() as $qad) {

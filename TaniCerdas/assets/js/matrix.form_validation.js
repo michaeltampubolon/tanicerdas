@@ -3,8 +3,6 @@ $(document).ready(function(){
 	
 	$('input[type=checkbox],input[type=radio],input[type=file]').uniform();
 	
-	$('select').select2();
-	
 	// Form Validation
     $("#basic_validate").validate({
 		rules:{
@@ -63,16 +61,16 @@ $(document).ready(function(){
 	
 	$("#password_validate").validate({
 		rules:{
-			pwd:{
+			password:{
 				required: true,
 				minlength:6,
 				maxlength:20
 			},
-			pwd2:{
+			repass:{
 				required:true,
 				minlength:6,
 				maxlength:20,
-				equalTo:"#pwd"
+				equalTo:"#repass"
 			}
 		},
 		errorClass: "help-inline",

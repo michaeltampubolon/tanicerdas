@@ -14,7 +14,7 @@
             <form action="<?php echo base_url();?>index.php/Login/login" method="post">
 				 
                 <?php
-                    if (validation_errors() || $this->session->flashdata('result_login')) {
+                    if ($this->session->flashdata('result_login')) {
                   ?>
                         <div class="alert alert-danger animated fadeInDown" role="alert">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -44,8 +44,8 @@
                 
                 <h6 align="right">Belum memiliki akun? <a href="<?php echo base_url();?>index.php/Login/register" class="signup">Daftar</a></h6>
 
-                <div class="form-actions">
-                    <span class="pull-left"><a href="#" class="flip-link btn btn-info" id="to-recover">Lupa Password?</a></span>
+                <div class="form-actions"> 
+                     <span class="pull-left"><a href="<?php echo base_url();?>index.php/thread" class="flip-link btn btn-info" id="to-recover">Login Penyuluh</a></span>
                     <span class="pull-right"><input  class="btn btn-primary" type="submit" value="Masuk" >
                     </span>
                 </div>

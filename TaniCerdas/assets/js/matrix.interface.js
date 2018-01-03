@@ -37,13 +37,13 @@ $(document).ready(function(){
 	});	
 	$(".peity_bar_neutral span").peity("bar", {
 		colour: "#757575"
-	});
+	}); 
 	
 	// === jQeury Gritter, a growl-like notifications === //
-	$.gritter.add({
+	$.gritter.add({ 
 		title:	'Important Unread messages',
-		text:	'You have 12 unread messages.',
-		image: 	'img/demo/envelope.png',
+		text:	'Memiliki 10 pesan belum dibaca.',
+		image: 	'<?php echo base_url();?>assets/img/demo/envelope.png',
 		sticky: false
 	});	
 	$('#gritter-notify .normal').click(function(){
@@ -66,7 +66,7 @@ $(document).ready(function(){
 		var imgsrc = $(this).attr('data-image');
 		$.gritter.add({
 			title:	'Important Unread messages',
-			text:	'You have 12 unread messages.',
+			text:	'Memiliki 10 pesan belum dibaca.',
 			image: imgsrc,
 			sticky: false
 		});		
