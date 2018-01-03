@@ -18,19 +18,19 @@ class Tanaman_model extends CI_Model {
         $query->where('temperatur <',$filter_params['temperatur']+10);
       }
       if($filter_params['kelembaban_udara']){
-        $query->or_where('kelembaban_udara >',$filter_params['kelembaban_udara']-10);
+        $query->where('kelembaban_udara >',$filter_params['kelembaban_udara']-10);
         $query->where('kelembaban_udara <',$filter_params['kelembaban_udara']+10);
       }
       if($filter_params['ph_tanah']){
-        $query->or_where('ph_tanah >',$filter_params['ph_tanah']-1);
+        $query->where('ph_tanah >',$filter_params['ph_tanah']-1);
         $query->where('ph_tanah <',$filter_params['ph_tanah']+1);
       }
       if($filter_params['ketinggian_tempat']){
-        $query->or_where('ketinggian_tempat >',$filter_params['ketinggian_tempat']-100);
+        $query->where('ketinggian_tempat >',$filter_params['ketinggian_tempat']-100);
         $query->where('ketinggian_tempat <',$filter_params['ketinggian_tempat']+100);
       }
       if($filter_params['curah_hujan']){
-        $query->or_where('curah_hujan >',$filter_params['curah_hujan']-15);
+        $query->where('curah_hujan >',$filter_params['curah_hujan']-15);
         $query->where('curah_hujan <',$filter_params['curah_hujan']+15);
       }
       if($filter_params['search']){

@@ -18,7 +18,7 @@ class Model_lahan extends CI_Model {
     $this->db->query("DELETE lahan,jadwal_tanam FROM user,pemohon,peserta 
         WHERE user.id_user=pemohon.id_pemohon 
         AND pemohon.id_pemohon=peserta.id_peserta 
-        AND pemohon.id_pemohon= $id";
+        AND pemohon.id_pemohon= $id");
   }
 
   public function ubah_lahan($id_lahan,$data_lahan){

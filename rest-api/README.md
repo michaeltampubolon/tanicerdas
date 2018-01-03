@@ -10,12 +10,12 @@ http://domainname/index.php/tanaman
 ```
 
 Kirimkan opsi parameter berikut untuk memfilter dataset:
-- s: Opsi queri umum pencarian tanaman
-- ph: ph tanaman (toleransi +/- 1.0)
-- temp: temperatur udara (toleransi +/- 10)
-- udara: kelembaban udara (toleransi +/- 10)
-- dpl: ketinggian tempat (toleransi +/- 100 m)
-- hujan: curah hujan (toleransi +/- 15)
+- `s`: Opsi queri umum pencarian tanaman
+- `ph`: ph tanaman (toleransi +/- 1.0)
+- `temp`: temperatur udara (toleransi +/- 10)
+- `udara`: kelembaban udara (toleransi +/- 10)
+- `dpl`: ketinggian tempat (toleransi +/- 100 m)
+- `hujan`: curah hujan (toleransi +/- 15)
 
 Format
 ```
