@@ -37,8 +37,8 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 define('TBL_CATEGORIES', 'kategori');
-define('TBL_POSTS',      'posts');
-define('TBL_THREADS',    'threads');
+define('TBL_POSTS',      'komentar');
+define('TBL_THREADS',    'diskusi');
 define('TBL_USERS',      'users');
 define('TBL_ROLES',      'roles');
 define('CIBB_TITLE',     ' &mdash; Tani Cerdas');

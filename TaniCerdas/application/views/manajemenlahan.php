@@ -5,14 +5,14 @@
 
 <!--sidebar-menu-->
 
-<div id="sidebar"> <a href="#" class="visible-phone"><i class="icon icon-list"></i>Forms</a>
-    <ul>
+ <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Timeline</a>
+  <ul>
     <li><a href="<?php echo base_url();?>index.php/Beranda"><i class="icon icon-home"></i> <span>Timeline</span></a> </li>
     
     <li><a href="<?php echo base_url();?>index.php/Beranda/detail/<?php echo $this->session->userdata('id_user')?>">
-    <i class="icon icon-user"></i> <span>Profil</span></a> </li>
+    <i class="icon icon-home"></i> <span>Profil</span></a> </li>
 
-    <li  class="active"> <a href="<?php echo base_url();?>index.php/Beranda/manajemenlahan"><i class="icon icon-inbox"></i> <span>Manajemen Lahan</span></a> </li>
+    <li class="active"> <a href="<?php echo base_url();?>index.php/Beranda/manajemenlahan"><i class="icon icon-inbox"></i> <span>Manajemen Lahan</span></a> </li>
 
     <li> <a href="<?php echo base_url();?>index.php/Beranda/komunitas/<?php echo $this->session->userdata('id_user')?>"><i class="icon icon-inbox"></i> <span>Komunitas</span></a> </li>
   </ul>
@@ -51,7 +51,7 @@
                       <div class="widget-box collapsible">    
                         <?php $no=0; foreach($lahan as $lahans ): $no++;?>
                           <div class="widget-title"> <a href="#<?php echo $lahans->id_lahan;?>" data-toggle="collapse"> <span class="icon"><i class="icon-remove"></i></span>
-                            <h5>LAHAN <?php echo $no." - ID LAHAN : ".$lahans->id_lahan;?></h5>
+                            <h5>LAHAN <?php echo $no." - ID LAHAN : ".$lahans->id_lahan;?> <?= $lahans->kota.', '.$lahans->provinsi ?></h5>
                           </a> </div>
 
                           <div class="collapse" id="<?php echo $lahans->id_lahan;?>">
@@ -61,6 +61,7 @@
                                 <div class="user-thumb"> <img width="40" height="40" alt="User" src="<?php echo base_url();?>assets/img/demo/av1.jpg"> </div>
                                 <div class="article-post">
                                   <div class="fr">
+                                    <?=  anchor('Lahan/listjadwaltanam/'.$lahans->id_lahan,'Jadwal Tanam',['class'=>'btn btn-success']) ?> 
                                      <?=  anchor('Lahan/ubah_lahan/'.$lahans->id_lahan,'Ubah',['class'=>'btn btn-primary']) ?> 
                                      <?=  anchor('Lahan/hapus_lahan/'.$lahans->id_lahan,'Hapus',['class'=>'btn btn-danger','onclick'=>'return confirm(\'Anda yakin menghapus Informasi Lahan ? \')']) ?>
                                   </div>
@@ -74,6 +75,10 @@
                                       <div class="widget-content nopadding">
                                         <table class="table table-bordered">
                                           <tbody>
+                                          <tr>
+                                              <td>Owner</td>
+                                              <td><?php echo $lahans->owner->nama;?></td>
+                                            </tr>
                                             <tr>
                                               <td>Provinsi</td>
                                               <td><?php echo $lahans->provinsi;?></td>
@@ -146,7 +151,7 @@
                                   </div>
                                 </div>
                                 </div>
-                                 <?=  anchor('Lahan/listjadwaltanam/'.$lahans->id_lahan,'Jadwal Tanam',['class'=>'btn btn-success']) ?> 
+                                 
                               </li>
                             </ul>
                             </div>
@@ -165,7 +170,7 @@
 </div>
 <!--Footer-part-->
 <div class="row-fluid">
-  <div id="footer" class="span12"> 2013 &copy; Design by <a href="https://tanicerdas.com">Tani Cerdas</a> </div>
+  <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
 </div>
 <!--end-Footer-part-->
 <script src="<?php echo base_url();?>assets/js/jquery.min.js"></script> 

@@ -14,7 +14,8 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/TaniCerdas/';
+// $config['base_url']	= 'http://localhost/tanicerdas.com/tanicerdas/';
+$config['base_url']	= 'http://tanicerdas.id/';
 
 /*
 |--------------------------------------------------------------------------

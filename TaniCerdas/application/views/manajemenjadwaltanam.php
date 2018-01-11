@@ -3,7 +3,11 @@
 
 <?php 
   $this->load->view('layout/header2');
-  $id_lahan = $lahans->id_lahan;
+  
+?>
+
+<?php
+  // $id_lahan = $lahans->id_lahan;
 ?>
 
 <!--sidebar-menu-->
@@ -11,13 +15,7 @@
 <div id="sidebar"> <a href="#" class="visible-phone"><i class="icon icon-list"></i>Forms</a>
   <ul>
     <li><a href="<?php echo base_url();?>index.php/Beranda"><i class="icon icon-home"></i> <span>Timeline</span></a> </li>
-    
-    <li><a href="<?php echo base_url();?>index.php/Beranda/detail/<?php echo $this->session->userdata('id_user')?>">
-    <i class="icon icon-home"></i> <span>Profil</span></a> </li>
-
-    <li  class="active"> <a href="<?php echo base_url();?>index.php/Beranda/manajemenlahan"><i class="icon icon-inbox"></i> <span>Manajemen Lahan</span></a> </li>
-
-    <li> <a href="<?php echo base_url();?>index.php/Beranda/komunitas/<?php echo $this->session->userdata('id_user')?>"><i class="icon icon-inbox"></i> <span>Komunitas</span></a> </li>
+    <li class="submenu active"> <a href="<?php echo base_url();?>index.php/Beranda/manajemenlahan"><i class="icon icon-inbox"></i> <span>Manajemen Lahan</span></a> </li>
   </ul>
 </div>
 
@@ -28,7 +26,8 @@
   </div>
    
    <div class="container-fluid"> 
-      <?=  anchor('Beranda/tambahjadwaltanam/'.$id_lahan,'Tambah Jadwal Tanam',['class'=>'btn btn btn-success']) ?> 
+      <!-- <?=  anchor('Beranda/tambahjadwaltanam/'.$id_lahan,'Tambah Jadwal Tanam',['class'=>'btn btn btn-success']) ?>  -->
+      <?=  anchor('Tanaman/listTanaman/'.$id_lahan,'Cari Tanaman',['class'=>'btn btn btn-success']) ?> 
   </div>
 
 
@@ -53,15 +52,37 @@
                 <tr class="gradeX">
                   <td>
 
+                    <table>
+                      <tr>
+                        <th>No</th>
+                        <th>Tanggal</th>
+                        <th>Varietas</th>
+                        <th>Kegiatan</th>
+                        <th>Durasi (Hari)</th>
+                        <th>Progress (%)</th>
+                        <th>Aksi</th>
+                      </tr>
                   <?php $no=0; foreach($jadwal_tanam as $jadwal ): $no++;?>
-                  <div class="accordion" id="collapse-group">
+                      <tr>
+                        <td><?= $no ?></td>
+                        <td><?= date("d-M-Y",strtotime($jadwal->tgl)) ?></td>
+                        <td><?= $jadwal->tanaman->nama_tanaman ?></td>
+                        <td><h5><?= $jadwal->kegiatan ?></h5><q><?= $jadwal->ket ?></q></td>
+                        <td><?= $jadwal->durasi ?></td>
+                        <td><?= $jadwal->progress ?></td>
+                        <td>
+                          <?=  anchor('Lahan/ubah_jadwaltanam/'.$jadwal->id,'Ubah',['class'=>'btn btn-primary']) ?> 
+                          <?=  anchor('Lahan/hapus_jadwaltanam/'.$jadwal->id,'Hapus',['class'=>'btn btn-danger','onclick'=>'return confirm(\'Anda yakin menghapus item ini ? \')']) ?>
+                        </td>
+                      </tr>
+                  <!-- <div class="accordion" id="collapse-group">
                     <div class="accordion-group widget-box">
                       <div class="accordion-heading">
-                        <div class="widget-title"> <a data-parent="#collapse-group" href="#<?php echo $no;?>" data-toggle="collapse"> <span class="icon"><i class="icon-circle-arrow-right"></i></span>
+                        <div class="widget-title"> <a data-parent="#collapse-group" href="#<?php echo $jadwal->id_tanaman;?>" data-toggle="collapse"> <span class="icon"><i class="icon-circle-arrow-right"></i></span>
                           <h5>JADWAL TANAM <?php echo $no;?></h5>
                           </a> </div>
                       </div>
-                      <div class="collapse accordion-body" id="<?php echo $no;?>">
+                      <div class="collapse accordion-body" id="<?php echo $jadwal->id_tanaman;?>">
                           <div class="widget-content"> 
                             <ul class="recent-posts">
                               <li>
@@ -69,7 +90,7 @@
                                 <div class="article-post">
                                   <div class="fr">
                                      <?=  anchor('Lahan/ubah_jadwaltanam/'.$jadwal->id_tanaman,'Ubah',['class'=>'btn btn-primary']) ?> 
-                                     <?=  anchor('Lahan/hapus_jadwaltanam/'.$jadwal->id,'Hapus',['class'=>'btn btn-danger','onclick'=>'return confirm(\'Anda yakin menghapus Informasi Lahan ? \')']) ?>
+                                     <?=  anchor('Lahan/hapus_jadwaltanam/'.$jadwal->id_tanaman,'Hapus',['class'=>'btn btn-danger','onclick'=>'return confirm(\'Anda yakin menghapus Informasi Lahan ? \')']) ?>
                                   </div>
                                 
                                   <div class="row-fluid">
@@ -83,7 +104,7 @@
                                           <tbody>
                                             <tr>
                                               <td>Jenis Tanaman</td>
-                                              <td><?php echo $jadwal->nama_tanaman;?></td>
+                                              <td></td>
                                             </tr>
                                             <tr>
                                               <td>Kegiatan</td>
@@ -109,8 +130,9 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 <?php endforeach; ?>
+                    </table>
 
                   </td>
                 </tr>
@@ -124,7 +146,7 @@
 </div>
 <!--Footer-part-->
 <div class="row-fluid">
-  <div id="footer" class="span12"> 2013 &copy; Design by <a href="https://tanicerdas.com">Tani Cerdas</a> </div>
+  <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
 </div>
 <!--end-Footer-part-->
 <script src="<?php echo base_url();?>assets/js/jquery.min.js"></script> 

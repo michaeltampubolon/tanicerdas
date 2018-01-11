@@ -1,18 +1,23 @@
-<?php 
-  $id_lahan            = $jadwal->id_lahan; 
+<?php  
+  $id                  = $jadwal->id;    
   if($this->input->post('is_submitted')){ 
     $kegiatan          = set_value('kegiatan');
+    $tgl               = set_value('tgl');
     $durasi            = set_value('durasi');
     $progress          = set_value('progress');
-    $id_tanaman        = set_value('id_tanaman');
+    $ket               = set_value('ket');
+    $seq               = set_value('seq');
+    //$id_tanaman      = set_value('id_tanaman');
   }else{
-      $kegiatan        = $jadwal->kegiatan; 
+      $kegiatan        = $jadwal->kegiatan;
       $durasi          = $jadwal->durasi;
       $progress        = $jadwal->progress;
-      $id_tanaman      = $jadwal->id_tanaman;
+      $id              = $jadwal->id;      
+      $tgl             = $jadwal->tgl;
+      $ket             = $jadwal->ket;
+      $seq             = $jadwal->seq;
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,8 +52,8 @@
       </div>
       <div class="widget-content">
         <div class="control-group">
-           <?php echo form_open_multipart('Lahan/ubah_jadwaltanam/'.$id_tanaman,['class'=>'form-horizontal']);?>
-            <div class="control-group">
+           <?php echo form_open_multipart('Lahan/ubah_jadwaltanam/'.$id,['class'=>'form-horizontal']);?>
+            <!-- <div class="control-group">
               <label class="control-label">Jenis Tanaman</label>
               <div class="controls">
                  <?php
@@ -61,14 +66,7 @@
                   echo "</select><br/>";
                 ?>
               </div>
-            </div>
-
-            <div class="control-group">
-              <label class="control-label">Kegiatan</label>
-              <div class="controls"> 
-                <textarea name="kegiatan" class="textarea_editor span12" rows="6" placeholder="Kegiatan Tanam" required=""><?= $kegiatan ?></textarea> 
-              </div>
-            </div>
+            </div> -->
             <div class="control-group">
               <label class="control-label">Durasi</label>
               <div class="controls">
@@ -76,9 +74,35 @@
               </div>
             </div>
             <div class="control-group">
+              <label class="control-label">Kegiatan</label>
+              <div class="controls"> 
+                <textarea name="kegiatan" class="textarea_editor span12" rows="6" placeholder="Kegiatan Tanam" required=""><?= $kegiatan ?></textarea> 
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">Tanggal</label>
+              <div class="controls">
+                <input type="date"  class="span11"  name="tgl"  value="<?= $tgl ?>" required />
+              </div>
+            </div> 
+
+            <div class="control-group">
               <label class="control-label">Progress</label>
               <div class="controls">
                  <textarea name="progress" class="textarea_editor span12" rows="6" placeholder="Progress Tanam" required=""><?= $progress ?></textarea>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Keterangan</label>
+              <div class="controls">
+                 <textarea name="ket" class="textarea_editor span12" rows="6" placeholder="Keterangan Tanam"><?= $ket ?></textarea>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Seq</label>
+              <div class="controls">
+                <input type="text"  class="span11" placeholder="Seq Tanam" name="seq" value="<?= $seq ?>" required />
               </div>
             </div>
             <div class="form-actions">

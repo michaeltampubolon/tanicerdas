@@ -25,8 +25,12 @@ class Beranda extends CI_Controller {
 		$this->load->view('lahan');
 	}
 	public function manajemenlahan(){
-		$data1['id_user'] = $this->session->userdata('id_user');
-		$data['lahan'] = $this->Model_lahan->getLahan($data1['id_user']);
+		$usr = $this->session->userdata('id_user');
+		$data['lahan'] = Model_lahan::where('id_user', $usr)->get();
+		// print_r($data['lahan']);die();
+		// foreach($data['lahan'] as $lahan){
+		// 	print_r($lahan);
+		// }die();
 		$this->load->view('manajemenlahan',$data);
 	}
 	public function manajemenjadwaltanam(){
@@ -50,7 +54,7 @@ class Beranda extends CI_Controller {
 		$this->form_validation->set_rules('alamat_jalan','Alamat Jalan','required');
 		
 		if ($this->form_validation->run() == FALSE)	{
-				$data['user'] = $this->Model_User->findUser($id_user); 
+				$data['user'] = $this->Model_User->find($id_user); 
 				$this->load->view('detail',$data);
 			} else {	
 				$data_user = array(

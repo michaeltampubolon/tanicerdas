@@ -1,31 +1,83 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Model_lahan extends CI_Model { 
+class Model_lahan extends Eloquent { 
+  protected $table = 'lahan';
+  public $timestamps = FALSE;
+  protected $primaryKey = 'id_lahan';
+  protected $fillable = ['provinsi','kota','kecamatan','longlat','luas','temperatur','curah_hujan',
+    'tekstur','ph','drainase','kedalaman_tanah','lereng','ketebalan_gambut'
+  ];
 
-  public function create($data_lahan){
-    $this->db->insert('lahan',$data_lahan);
-  }
-  public function getLahan($data){
-    $this->db->where('id_user', $data);
-    $query = $this->db->get('lahan');
-    return $query->result();   
-  }
-  public function delete($id_lahan){
-     $this->db->query("DELETE l.*, j.* FROM lahan l JOIN jadwal_tanam j ON l.id_lahan = j.id_lahan WHERE j.id_lahan = '$id_lahan' AND l.id_lahan= '$id_lahan'");
-  }
-
-  public function ubah_lahan($id_lahan,$data_lahan){
-    $this->db->where('id_lahan',$id_lahan)->update('lahan',$data_lahan);
+  public function JadwalTanam() {
+    return $this->hasMany('Model_JadwalTanam', 'id_lahan');
   }
 
-  public function find($id_lahan){ 
-      $data = $this->db->where('id_lahan',$id_lahan)->limit(1)->get('lahan');
-      if ($data->num_rows() > 0 )
-          {
-              return $data->row();
-          }else {
-              return array();
-          }           
+  public function Owner() {
+    return $this->belongsTo('Model_User', 'id_user');
+  }
+
+
+  public function genNewIdLahan(){
+    return "IDL-".rand(1111,9999);
+  }
+
+  public function setIdLahan($id_lahan){
+    $this->id_lahan = $id_lahan;
+  }
+
+  public function tambah_lahan($data){
+    $lahan = new Model_lahan;
+		
+		$lahan->provinsi 			= $data['provinsi'];
+		$lahan->kota 				= $data['kota'];
+		$lahan->kecamatan 			= $data['kecamatan'];
+		$lahan->longlat 			= $data['longlat'];
+		$lahan->luas 				= $data['luas'];
+		$lahan->temperatur 			= $data['temperatur'];
+		$lahan->curah_hujan 		= $data['curah_hujan'];
+		$lahan->tekstur 			= $data['tekstur'];
+		$lahan->ph 					= $data['ph'];
+		$lahan->drainase 			= $data['drainase'];
+		$lahan->kedalaman_tanah 	= $data['kedalaman_tanah'];
+		$lahan->lereng 				= $data['lereng'];
+		$lahan->ketebalan_gambut 	= $data['ketebalan_gambut'];
+		$lahan->drainase 			= $data['drainase'];
+		$lahan->id_user 			= $data['id_user'];
+    $lahan->setIdLahan($lahan->genNewIdLahan());
+    
+    $lahan->save();
+  }
+
+  public function ubah_lahan($data){
+    if ($lahan = $this->find($data['id_lahan'])){
+		
+      $lahan->provinsi 			= $data['provinsi'];
+      $lahan->kota 				  = $data['kota'];
+      $lahan->kecamatan 		= $data['kecamatan'];
+      $lahan->longlat 			= $data['longlat'];
+      $lahan->luas 				  = $data['luas'];
+      $lahan->temperatur 		= $data['temperatur'];
+      $lahan->curah_hujan 	= $data['curah_hujan'];
+      $lahan->tekstur 			= $data['tekstur'];
+      $lahan->ph 					  = $data['ph'];
+      $lahan->drainase 			= $data['drainase'];
+      $lahan->kedalaman_tanah 	= $data['kedalaman_tanah'];
+      $lahan->lereng 				= $data['lereng'];
+      $lahan->ketebalan_gambut 	= $data['ketebalan_gambut'];
+      $lahan->drainase 			= $data['drainase'];
+      
+      $lahan->save();
+    }
+  }
+
+  public function hapus_lahan($id_lahan){
+    if($lahan = $this->find($id_lahan)) {
+      foreach($lahan->JadwalTanam as $jadwal) {
+        $jadwal->delete();
+      }
+      $lahan->delete();
+    }
   }
 }
